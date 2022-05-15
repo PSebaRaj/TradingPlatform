@@ -1,2 +1,4 @@
 # TradingPlatform
- Trade stocks to built a portfolio
+ Desciption: Trade stocks to built a portfolio
+ 
+ Languages Used: React + Redux, Node, Express, MongoDB
