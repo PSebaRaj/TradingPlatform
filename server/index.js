@@ -7,10 +7,11 @@ import stockRoutes from './routes/stocks.js';
 
 const app = express();
 
-app.use('/portfolio', stockRoutes);
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
+
+app.use('/portfolio', stockRoutes);
 
 const CONNECTION_URL = "mongodb+srv://psebaraj:bingbong@cluster0.uq1cx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 const PORT = process.env.PORT || 3001;
