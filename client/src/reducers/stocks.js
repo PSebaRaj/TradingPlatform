@@ -1,12 +1,12 @@
 const reducer = (state = [], action) => {
   switch (action.type) {
-    case 'FETCH_ALL_STOCKS':
-        return action.payload;
-    case 'CREATE_STOCK':
-        return state;
+    case "FETCH_ALL_STOCKS":
+      return action.payload;
+    case "CREATE_STOCK":
+      return [...state, action.payload];
     default:
-        return state;
+      return state;
   }
-}
+};
 
 export default reducer;

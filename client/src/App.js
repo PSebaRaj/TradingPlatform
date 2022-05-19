@@ -1,10 +1,15 @@
-import "./App.css";
 import React, { useEffect } from "react";
+import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
 import { getStocks } from "./actions/stocks";
 
+import Form from "./components/Form/Form";
+import Stocks from "./components/Stocks/Stocks";
+import useStyles from "./styles";
+
 function App() {
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -12,17 +17,33 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className="App">
-      <h1>STOCK TRADER</h1>
+    <Container maxWidth="lg">
+      <AppBar className={classes.appBar} position="static" color="inherit">
+        <Typography className={classes.heading} variant="h3" align="center">
+          PSameritrade
+        </Typography>
+      </AppBar>
 
-      <div className="getTicker">
-        <label>Search by Stock Ticker:</label>
-        <input type="text" name="inputTicker"/>
-
-        <button>Search</button>
-      </div>
-      
-    </div>
+      <Grow in>
+        <Container maxWidth="lg">
+          <Grid
+            container
+            justify="space-between"
+            alignItems="stretch"
+            spacing={3}
+          >
+            {/* have form here */}
+            <Grid item xs={12} sm={6}>
+              <Stocks />
+            </Grid>
+            {/* have portfolio display here */}
+            <Grid item xs={12} sm={4}>
+              <Form />
+            </Grid>
+          </Grid>
+        </Container>
+      </Grow>
+    </Container>
   );
 }
 
