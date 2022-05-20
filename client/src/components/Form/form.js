@@ -25,7 +25,7 @@ const Form = () => {
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">Search by Ticker:</Typography>
+        <Typography variant="h6">Buy Shares:</Typography>
         <TextField
           name="ticker"
           variant="outlined"
@@ -36,6 +36,16 @@ const Form = () => {
             setStockData({ ...stockData, ticker: e.target.value })
           }
         />
+        <TextField
+          name="quantity"
+          variant="outlined"
+          label="Quantity"
+          fullWidth
+          value={stockData.quantity}
+          onChange={(e) =>
+            setStockData({ ...stockData, quantity: e.target.value })
+          }
+        />
         <Button
           className={classes.buttonSubmit}
           variant="container"
@@ -44,7 +54,7 @@ const Form = () => {
           type="submit"
           fullWidth
         >
-          Search
+          Buy
         </Button>
       </form>
     </Paper>

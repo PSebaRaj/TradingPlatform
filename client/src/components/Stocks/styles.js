@@ -11,4 +11,10 @@ export default makeStyles((theme) => ({
   actionDiv: {
     textAlign: "center",
   },
+  heading: {
+    // position: "absolute",
+    top: "20px",
+    left: "50px",
+    color: "white",
+  },
 }));
