@@ -5,7 +5,7 @@ import Stock from "./Stock/Stock";
 import { useSelector } from "react-redux";
 import useStyles from "./styles";
 
-const Stocks = () => {
+const Stocks = ({ setCurrentId }) => {
   const classes = useStyles();
   const stocks = useSelector((state) => state.stocks);
 
@@ -31,7 +31,7 @@ const Stocks = () => {
       >
         {stocks.map((stock) => (
           <Grid item xs={12} sm={12} md={12} lg={12} key={stock._id}>
-            <Stock stock={stock} />
+            <Stock stock={stock} setCurrentId={setCurrentId} />
           </Grid>
         ))}
       </Grid>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 
@@ -9,12 +9,13 @@ import Stocks from "./components/Stocks/Stocks";
 import useStyles from "./styles";
 
 function App() {
+  const [currentId, setCurrentId] = useState(null);
   const classes = useStyles();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getStocks());
-  }, [dispatch]);
+  }, [currentId, dispatch]);
 
   return (
     <Container maxWidth="lg">
@@ -34,11 +35,11 @@ function App() {
           >
             {/* have form here */}
             <Grid item xs={12} sm={6}>
-              <Stocks />
+              <Stocks setCurrentId={setCurrentId} />
             </Grid>
             {/* have portfolio display here */}
             <Grid item xs={12} sm={4}>
-              <Form />
+              <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>
           </Grid>
         </Container>

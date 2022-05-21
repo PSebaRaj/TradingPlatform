@@ -1,20 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./styles";
 
-import { createStock } from "../../actions/stocks";
+import { createStock, updateStock } from "../../actions/stocks";
 
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
   const [stockData, setStockData] = useState({
     ticker: "",
+    quantity: "",
   });
+  const stock = useSelector((state) =>
+    currentId ? state.stocks.find((s) => s._id === currentId) : null
+  );
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (stock) {
+      setStockData({ stock });
+    }
+  }, [stock]);
+
+  const clear = () => {
+    setCurrentId(null);
+    setStockData({ ticker: "", quantity: "" });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createStock(stockData));
+
+    if (currentId) {
+      dispatch(updateStock(currentId, stockData));
+    } else {
+      dispatch(createStock(stockData));
+    }
+
+    clear();
   };
 
   return (
