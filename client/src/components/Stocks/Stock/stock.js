@@ -1,15 +1,6 @@
 import React from "react";
-import {
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Button,
-  Typography,
-} from "@material-ui/core";
+import { Card, CardActions, Button, Typography } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 import { useDispatch } from "react-redux";
 
@@ -24,7 +15,7 @@ const Stock = ({ stock, setCurrentId }) => {
 
   const profit = stock.currentPrice - stock.purchasePrice;
   const profitRatio = profit / stock.purchasePrice;
-  let isGreen = Boolean(profitRatio > 0);
+  let isGreen = Boolean(profitRatio >= 0);
 
   if (isGreen) {
     PRFormat = classes.overlay2;
@@ -42,15 +33,15 @@ const Stock = ({ stock, setCurrentId }) => {
 
       <div className={PRFormat}>
         <Typography align="left" variant="h6">
-          ${stock.currentPrice} Δ: {profitRatio * 100}%
+          ${stock.currentPrice.toFixed(2)} Δ: {(profitRatio * 100).toFixed(3)}%
         </Typography>
       </div>
 
       <div className={classes.overlay}>
         <Typography variant="body2">
-          Purchased: ({stock.quantity}) shares{" "}
+          Position: ({stock.quantity}) shares{" "}
           {moment(stock.dataCreated).fromNow()} @ ${""}
-          {stock.purchasePrice} per share
+          {stock.purchasePrice.toFixed(2)} per share
         </Typography>
       </div>
 
@@ -66,9 +57,7 @@ const Stock = ({ stock, setCurrentId }) => {
           size="small"
           color="primary"
           onClick={() => setCurrentId(stock._id)}
-        >
-          <EditIcon fontSize="small" /> Edit
-        </Button>
+        ></Button>
       </CardActions>
     </Card>
   );

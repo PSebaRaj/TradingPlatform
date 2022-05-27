@@ -23,4 +23,8 @@ export default makeStyles((theme) => ({
     backgroundColor: "rgba(0, 100, 0, 0.45)",
     // backgroundBlendMode: "darken",
   },
+  buttonCheck: {
+    marginBottom: 10,
+    backgroundColor: "rgba(0, 100, 100, 0.45)",
+  },
 }));

@@ -1,4 +1,20 @@
 import * as api from "../api";
+// const axios = require("axios");
+
+// axios
+// .get(
+//   `https://psebaraj-stock-scraper.herokuapp.com/${data.ticker}/price`,
+//   {
+//     responseType: "json",
+//   }
+// )
+// .then((response) => {
+//   console.log(response.data.price);
+//   data.currentPrice = response.data.price;
+// })
+// .catch((error) => {
+//   console.log(error);
+// });
 
 // action creators
 export const getStocks = () => async (dispatch) => {

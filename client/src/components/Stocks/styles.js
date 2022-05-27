@@ -17,4 +17,8 @@ export default makeStyles((theme) => ({
     left: "50px",
     color: "white",
   },
+  refreshPriceButton: {
+    marginBottom: 10,
+    backgroundColor: "white",
+  },
 }));

@@ -5,11 +5,15 @@ import useStyles from "./styles";
 
 import { createStock, updateStock } from "../../actions/stocks";
 
+const axios = require("axios");
+
 const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
+  const [btnDisabled, setBtnDisabled] = useState(true);
   const [stockData, setStockData] = useState({
     ticker: "",
     quantity: "",
+    currentPrice: 0,
   });
   const stock = useSelector((state) =>
     currentId ? state.stocks.find((s) => s._id === currentId) : null
@@ -27,6 +31,32 @@ const Form = ({ currentId, setCurrentId }) => {
     setStockData({ ticker: "", quantity: "" });
   };
 
+  const setStockPrice = () => {
+    setBtnDisabled(false);
+
+    axios
+      .get(
+        `https://psebaraj-stock-scraper.herokuapp.com/${stockData.ticker}/price`,
+        {
+          responseType: "json",
+        }
+      )
+      .then((response) => {
+        setStockData({
+          ...stockData,
+          currentPrice: response.data.price,
+          purchasePrice: response.data.price,
+        });
+        console.log(response.data.price);
+      })
+      .then(() => {
+        console.log("created stock");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -37,6 +67,7 @@ const Form = ({ currentId, setCurrentId }) => {
     }
 
     clear();
+    setBtnDisabled(true);
   };
 
   return (
@@ -45,7 +76,7 @@ const Form = ({ currentId, setCurrentId }) => {
         autoComplete="off"
         noValidate
         className={`${classes.root} ${classes.form}`}
-        onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
       >
         <Typography variant="h6">Buy Shares:</Typography>
         <TextField
@@ -64,10 +95,22 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Quantity"
           fullWidth
           value={stockData.quantity}
-          onChange={(e) =>
-            setStockData({ ...stockData, quantity: e.target.value })
-          }
+          onChange={(e) => {
+            setStockData({ ...stockData, quantity: e.target.value });
+            // setStockPrice();
+          }}
         />
+        <Button
+          className={classes.buttonCheck}
+          variant="container"
+          color="primary"
+          size="medium"
+          fullWidth
+          onClickCapture={setStockPrice}
+        >
+          {" "}
+          I am not a robot (fetch price)
+        </Button>
         <Button
           className={classes.buttonSubmit}
           variant="container"
@@ -75,6 +118,8 @@ const Form = ({ currentId, setCurrentId }) => {
           size="medium"
           type="submit"
           fullWidth
+          onClick={handleSubmit}
+          disabled={btnDisabled}
         >
           Buy
         </Button>
