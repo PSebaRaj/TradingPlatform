@@ -32,8 +32,6 @@ const Form = ({ currentId, setCurrentId }) => {
   };
 
   const setStockPrice = () => {
-    setBtnDisabled(false);
-
     axios
       .get(
         `https://psebaraj-stock-scraper.herokuapp.com/${stockData.ticker}/price`,
@@ -51,6 +49,7 @@ const Form = ({ currentId, setCurrentId }) => {
       })
       .then(() => {
         console.log("created stock");
+        setBtnDisabled(false);
       })
       .catch((error) => {
         console.log(error);

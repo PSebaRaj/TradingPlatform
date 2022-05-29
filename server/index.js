@@ -12,8 +12,7 @@ app.use(bodyParser.json());
 
 app.use("/portfolio", stockRoutes);
 
-const CONNECTION_URL =
-  "mongodb+srv://psebaraj:bingbong@cluster0.uq1cx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"; // PUT THIS IN DOT ENV BEFORE PUSHING TO GITHUB
+const CONNECTION_URL = `mongodb+srv://psebaraj:bingbong@cluster0.uq1cx.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`; // PUT THIS IN DOT ENV BEFORE PUSHING TO GITHUB
 const PORT = process.env.PORT || 3001;
 
 mongoose

@@ -5,11 +5,11 @@ const stockSchema = mongoose.Schema({
   ticker: String,
   purchasePrice: {
     type: Number,
-    default: 10,
+    default: -1,
   },
   currentPrice: {
     type: Number,
-    default: 25,
+    default: -1,
   },
   quantity: {
     type: Number,
